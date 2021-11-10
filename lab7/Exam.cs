@@ -15,7 +15,7 @@ namespace lab7
 
         public string GetInfo()
         {
-            return this.Subject + "-" + this.Lecturer.Name + "-" + this.ExamDate.Date + "\n";
+            return this.Subject + "-" + this.Lecturer.name + "-" + this.ExamDate.Date + "\n";
         }
 
         public override string GetTheme()

@@ -12,60 +12,108 @@ namespace lab7
 
         public void AddExam(Exam exam)
         {
-            session.SetExams(exam);
+            try
+            {
+                session.SetExams(exam);
+            }
+            finally { }
         }
 
         public void AddCredit(Test test)
         {
-            session.SetCredits(test);
+            try
+            {
+                session.SetCredits(test);
+            }
+            finally { }
         }
 
         public void DeleteExam(Exam exam)
         {
-            session.DeleteExam(exam);
+            try
+            {
+                session.DeleteExam(exam);
+            }
+            finally { }
         }
 
         public void DeleteCredit(Test test)
         {
-            session.DeleteCredit(test);
+            try { 
+                session.DeleteCredit(test);
+            }
+            finally { }
         }
 
         public List<Experiment> GetExamList()
         {
-            return session.GetExamList();
+            try
+            {
+                return session.GetExamList();
+            }
+            finally { }
         }
 
         public List<Experiment> GetCreditList()
         {
-            return session.GetCreditList();
+            try
+            {
+                return session.GetCreditList();
+            }
+            finally { }
         }
 
         public void PrintExamList()
         {
-            session.PrintExams();
+            try
+            {
+                session.PrintExams();
+                throw new Exception();
+            }
+            catch 
+            {
+                throw;
+            }
+            finally { }
         }
 
         public void PrintCreditList()
         {
-            session.PrintCreditList();
+            try
+            {
+                session.PrintCreditList();
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally { }
         }
 
         public int CountExperiments()
         {
-            return session.Exams.Count() + session.Credits.Count();
+            try
+            {
+                return session.Exams.Count() + session.Credits.Count();
+            }
+            finally { }
         }
 
         public int CountTests(List<Test> tests, int questionsCount)
         {
-            int counter = 0;
-            foreach (Test test in tests)
+            try
             {
-                if (test.QuestinsCount == questionsCount)
+                int counter = 0;
+                foreach (Test test in tests)
                 {
-                    counter++;
+                    if (test.QuestinsCount == questionsCount)
+                    {
+                        counter++;
+                    }
                 }
+                return counter;
             }
-            return counter;
+            finally { }
         }
     }
 }

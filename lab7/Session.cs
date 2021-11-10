@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,48 +14,88 @@ namespace lab7
 
         public void SetExams(Experiment experiment)
         {
-            Exams.Add(experiment);
+            try
+            {
+                Debug.Assert(experiment != null,"Значение не должно быть null");
+                Exams.Add(experiment);
+            }
+            finally { }
         }
 
         public void SetCredits(Experiment experiment)
         {
-            Credits.Add(experiment);
+            try
+            {
+                Credits.Add(experiment);
+            }
+            finally { }
         }
 
         public void DeleteExam(Experiment experiment)
         {
-            Exams.Remove(experiment);
+            try
+            {
+                Exams.Remove(experiment);
+            }
+            finally { }
         }
 
         public void DeleteCredit(Experiment experiment)
         {
-            Credits.Remove(experiment);
+            try
+            {
+                Credits.Remove(experiment);
+            }
+            finally { }
         }
 
         public List<Experiment> GetExamList()
         {
-            return Exams;
+            try
+            {
+                return Exams;
+            }
+            finally { }
         }
 
         public List<Experiment> GetCreditList()
         {
-            return Credits;
+            try { 
+                return Credits;
+            }
+            finally { }
         }
 
         public void PrintExams()
         {
-            foreach (Experiment experiment in Exams)
+            try
             {
-                Console.WriteLine(experiment.GetTheme());
+                foreach (Experiment experiment in Exams)
+                {
+                    Console.WriteLine(experiment.GetTheme());
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally { }
         }
 
         public void PrintCreditList()
         {
-            foreach (Experiment experiment in Credits)
+            try
             {
-                Console.WriteLine(experiment.GetTheme());
+                foreach (Experiment experiment in Credits)
+                {
+                    Console.WriteLine(experiment.GetTheme());
+                }
             }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally { }
         }
     }
 }

@@ -16,12 +16,22 @@ namespace lab7
 
     struct Lecturer
     {
-        public string Name;
-        public Exams Subject;
+        public string name;
+        public Exams subject;
+
+        public Lecturer(string name, Exams subject)
+        {
+            if((int)subject > 3 || (int)subject < 0)
+            {
+                throw new SubjectNotExistException("Данного предмета не существует");
+            }
+            this.name = name;
+            this.subject = subject;
+        }
 
         public void DisplayInfo()
         {
-            Console.WriteLine($"Name: {Name}  Subject: {Subject}");
+            Console.WriteLine($"Name: {name}  Subject: {subject}");
         }
     }
 
@@ -39,27 +49,57 @@ namespace lab7
                 new Test(30),
                 new Test(21),
             };
-            Lecturer math, oop, philosophy, computerNetworks;
-            math.Name = "Асмыкович";
-            math.Subject = 0;
-            oop.Name = "Пацей";
-            oop.Subject = (Exams)1;
-            philosophy.Name = "Подручный";
-            philosophy.Subject = (Exams)2;
-            computerNetworks.Name = "Миронов";
-            computerNetworks.Subject = (Exams)3;
-            Exam mathExam = new Exam("", "Математика", math, DateTime.Now.AddDays(50));
-            Exam oopExam = new Exam("", "ООП", oop, DateTime.Now.AddDays(55));
-            Exam philosophyExam = new Exam("", "Философия", philosophy, DateTime.Now.AddDays(61));
-            Exam computerNetworksExam = new Exam("", "Компьютерные сети", computerNetworks, DateTime.Now.AddDays(66));
-            controller.AddExam(mathExam);
-            controller.AddExam(oopExam);
-            controller.AddExam(philosophyExam);
-            controller.AddExam(computerNetworksExam);
-            controller.PrintExamList();
-            Console.WriteLine(controller.CountExperiments());
-            Console.WriteLine(controller.CountTests(tests, 21));
-            Console.ReadLine();
+            int test = 1000;
+            try
+            {
+                Lecturer math = new Lecturer("Асмыкович", 0);
+                Lecturer oop = new Lecturer("Пацей", (Exams)1);
+                Lecturer philosophy = new Lecturer("Подручный", (Exams)2);
+                Lecturer computerNetworks = new Lecturer("Миронов", (Exams)3);
+                Exam mathExam = new Exam("", "Математика", math, DateTime.Now.AddDays(50));
+                Exam oopExam = new Exam("", "ООП", oop, DateTime.Now.AddDays(55));
+                Exam philosophyExam = new Exam("", "Философия", philosophy, DateTime.Now.AddDays(61));
+                Exam computerNetworksExam = new Exam("", "Компьютерные сети", computerNetworks, DateTime.Now.AddDays(66));
+                controller.AddExam(mathExam);
+                controller.AddExam(oopExam);
+                controller.AddExam(philosophyExam);
+                controller.AddExam(computerNetworksExam);
+                controller.PrintExamList();
+                Console.WriteLine(controller.CountExperiments());
+                Console.WriteLine(controller.CountTests(tests, 21));
+                test = test / 0;
+                throw new InvalidCastException();
+            }
+            catch(DateException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            catch(SubjectMissingException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            catch(SubjectNotExistException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            catch(NullReferenceException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            catch(DivideByZeroException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            catch {
+                Console.WriteLine("Возникла непредвиденная ошибка");
+            }
+            finally {
+                Console.ReadLine(); 
+            }
         }
     }
     public abstract class Experiment
@@ -108,8 +148,16 @@ namespace lab7
         public Exam(string theme, string subject, Lecturer lecturer, DateTime examDate)
         {
             Theme = theme;
+            if (subject == null || subject == "")
+            {
+                throw new SubjectMissingException("Не указан предмет экзамена");
+            }
             Subject = subject;
             Lecturer = lecturer;
+            if (examDate <= DateTime.Now)
+            {
+                throw new DateException("Дата проведения экзамена должна быть позже сегодняшней");
+            }
             ExamDate = examDate;
         }
 
