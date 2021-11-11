@@ -55,12 +55,12 @@ namespace lab7
                 Lecturer math = new Lecturer("Асмыкович", 0);
                 Lecturer oop = new Lecturer("Пацей", (Exams)1);
                 Lecturer philosophy = new Lecturer("Подручный", (Exams)2);
-                Lecturer computerNetworks = new Lecturer("Миронов", (Exams)3);
-                Exam mathExam = new Exam("", "Математика", math, DateTime.Now.AddDays(50));
+                Lecturer computerNetworks = new Lecturer("Миронов", (Exams)6);
+                Exam mathExam = new Exam("", "Математика", math, DateTime.Now.AddDays(-50));
                 Exam oopExam = new Exam("", "ООП", oop, DateTime.Now.AddDays(55));
-                Exam philosophyExam = new Exam("", "Философия", philosophy, DateTime.Now.AddDays(61));
+                Exam philosophyExam = new Exam("", "", philosophy, DateTime.Now.AddDays(61));
                 Exam computerNetworksExam = new Exam("", "Компьютерные сети", computerNetworks, DateTime.Now.AddDays(66));
-                controller.AddExam(mathExam);
+                controller.AddExam(null);
                 controller.AddExam(oopExam);
                 controller.AddExam(philosophyExam);
                 controller.AddExam(computerNetworksExam);
