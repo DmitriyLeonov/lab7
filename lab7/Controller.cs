@@ -68,11 +68,6 @@ namespace lab7
             try
             {
                 session.PrintExams();
-                throw new Exception();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
             }
             finally { }
         }

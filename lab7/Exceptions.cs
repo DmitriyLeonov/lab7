@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab7
 {
-    public class DateException : ApplicationException
+    public class DateException : ArgumentOutOfRangeException
     {
         public DateException() { }
 
@@ -15,7 +15,7 @@ namespace lab7
         public DateException(string message, Exception innerException) : base(message, innerException) { }
     }
 
-    public class SubjectMissingException : ApplicationException
+    public class SubjectMissingException : Exception
     {
         public SubjectMissingException() { } 
         
@@ -24,7 +24,7 @@ namespace lab7
         public SubjectMissingException(string message, Exception innerException) : base(message, innerException) { }
     }
 
-    public class SubjectNotExistException : ApplicationException
+    public class SubjectNotExistException : ArgumentException
     {
         public SubjectNotExistException() { }
 
