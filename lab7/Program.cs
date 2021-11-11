@@ -90,10 +90,6 @@ namespace lab7
             {
                 Console.WriteLine(ex.ToString());
             }
-            catch (Exception ex) 
-            {
-                Console.WriteLine(ex.ToString());
-            }
             catch {
                 Console.WriteLine("Возникла непредвиденная ошибка");
             }

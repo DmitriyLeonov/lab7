@@ -70,9 +70,9 @@ namespace lab7
                 session.PrintExams();
                 throw new Exception();
             }
-            catch 
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.ToString());
             }
             finally { }
         }
