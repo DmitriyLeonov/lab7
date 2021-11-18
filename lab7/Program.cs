@@ -49,7 +49,7 @@ namespace lab7
                 new Test(30),
                 new Test(21),
             };
-            int test = 1000;
+            int test = 1;
             try
             {
                 Lecturer math = new Lecturer("Асмыкович", 0);
